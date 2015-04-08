@@ -58,10 +58,10 @@ class DATABASE_CONFIG {
 	public $default = array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'root',
+		'host' => '',
+		'login' => '',
 		'password' => '',
-		'database' => 'zadmin_www2',
+		'database' => '',
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);
