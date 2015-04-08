@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+<url>
+  <loc>http://www2.dranix.com.ph/</loc>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://www2.dranix.com.ph/aboutus/history</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www2.dranix.com.ph/aboutus/mvv</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www2.dranix.com.ph/aboutus/ar</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www2.dranix.com.ph/aboutus/outreach</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www2.dranix.com.ph/branch</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www2.dranix.com.ph/news</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www2.dranix.com.ph/career</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www2.dranix.com.ph/contact</loc>
+  <priority>0.80</priority>
+</url>
+</urlset>
