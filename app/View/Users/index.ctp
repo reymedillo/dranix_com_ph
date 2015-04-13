@@ -1,7 +1,12 @@
 <div class="container">
-	<h3>HR Dashboard</h3>
+	<h3>Dashboard</h3>
 	<hr/>
 	<div class="col-md-3">
+	<?php if($current_user['role'] == 'pawn'): ?>
+	<?php else: ?>
+		<?php echo $this->Html->link('POST A MEMO', ['controller' => 'memo', 'action' => 'post'], ['class' => 'btn btn-info form-control']); ?>
+		<br/>
+		<br/>
 		<?php echo $this->Html->link('POST A NEWS',array('controller'=>'news','action'=>'post'), array('class'=>'btn btn-info form-control'));?>
 		<br/>
 		<br/>
@@ -9,6 +14,7 @@
 		<br/>
 		<br/>
 		<?php echo $this->Html->link('POST AN EVENT',array('controller'=>'news','action'=>'post'), array('class'=>'btn btn-success form-control'));?>
+	<?php endif; ?>
 	</div>
 	<div class="col-md-9">
 		<div class="panel panel-info">
@@ -45,7 +51,6 @@
 				  <td><?php echo $career['Careers']['title']; ?></td>
 				  <td><?php echo $career['Careers']['division']; ?></td>
 				  <td><?php echo $career['Careers']['upload']; ?></td>
-				  <td><?php echo $this->Html->link('view',array('controller'=>'Careers','action'=>'view',$career['Careers']['id'])) ?></td>
 				</tr>
 				<?php endforeach; ?>
 			</tbody>

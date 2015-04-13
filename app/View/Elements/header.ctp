@@ -6,7 +6,7 @@
 	  <span class="icon-bar"></span>
 	  <span class="icon-bar"></span>
 	</button>
-	&nbsp;&nbsp;<img src="<?php echo Router::url('/', true).'img/dranix.png'; ?>"/>
+	&nbsp;&nbsp;<a href="<?php if($loggedIn){echo '/dashboard';}else{echo '/';} ?>"><img src="<?php echo Router::url('/',true).'img/dranix.png'; ?>"/></a>
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
 	<ul class="nav navbar-nav navbar-right">
@@ -22,13 +22,17 @@
 	  </li>
 	  <li class="<?php if(strpos($this->here, 'branch') === false){}else{echo 'active';} ?>" ><?php echo $this->Html->link('Branches', array('controller'=>'branches','action' => 'index'));?></li>
 	  <li class="<?php if($this->here == $dir.'news'){echo 'active';} ?>"  ><?php echo $this->Html->link('News & Events', array('controller'=>'news'));?></li>
+	  <?php if($loggedIn): ?>
+	  <li class="<?php if($this->here == $dir.'memo'){echo 'active';} ?>"  ><?php echo $this->Html->link('Memos', array('controller'=>'memo','action'=>'index'));?></li>
+	  <?php endif; ?>
 	  <li class="<?php if($this->here == $dir.'career'){echo 'active';} ?>"  ><?php echo $this->Html->link('Careers', array('controller'=>'career'));?></li>
 	  <li class="<?php if($this->here == $dir.'contact'){echo 'active';} ?>"><?php echo $this->Html->link('Contact Us', array('controller'=>'contact'));?></li>
 
 	  <?php if($loggedIn): ?>
 		<li class="<?php if($this->here == $dir.'contact'){echo 'active';} ?>"><?php echo $this->Html->link('Logout', array('controller'=>'users','action'=>'logout'));?></li>
 	  <?php else: ?>
-	  	<li><a data-toggle="modal" href="#myModal"><i class="fa fa-lock"></i></a></li>
+	  	<li><a data-toggle="modal" href="#myModal"><i class="fa fa-lock"></i></a>
+	  	</li>
 	  <?php endif; ?>
 	</ul>
   </div>
@@ -57,9 +61,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-

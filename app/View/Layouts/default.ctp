@@ -23,8 +23,7 @@ $dranix = 'Dranix';
 	
 	<?php echo $this->fetch('meta'); ?>
 	<?php echo $this->fetch('css'); ?>
-	<?php echo $this->fetch('script'); ?>
-	
+	<?php echo $this->fetch('script'); ?>	
 </head>
 <body>
 	<div id="header">
