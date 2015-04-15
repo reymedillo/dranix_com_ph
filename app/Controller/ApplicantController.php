@@ -23,7 +23,7 @@ class ApplicantController extends AppController {
 				&& is_uploaded_file($this->request->data['Applicant']['upload']['tmp_name'])
 			) {
 				// Strip path information
-				$filename = substr(Security::generateAuthKey(),0,5).'_'.basename($this->request->data['Applicant']['upload']['name']);
+				$filename = substr(Security::generateAuthKey(),0,5).'_'.basename();
 				move_uploaded_file(
 					$this->data['Applicant']['upload']['tmp_name'],
 					WWW_ROOT . 'files' . DS . $filename

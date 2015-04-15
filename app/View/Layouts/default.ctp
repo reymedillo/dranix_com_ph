@@ -10,6 +10,7 @@ $dranix = 'Dranix';
 		<?php echo $title_for_layout; ?>
 	</title>
 	<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+	<link rel="stylesheet" href="/css/fancyzoom.css"/>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 	<!--[if lt IE 9]><?php echo $this->Html->script(array('html5shiv.js', 'respond.min.js')); ?><![endif]-->
@@ -24,6 +25,12 @@ $dranix = 'Dranix';
 	<?php echo $this->fetch('meta'); ?>
 	<?php echo $this->fetch('css'); ?>
 	<?php echo $this->fetch('script'); ?>	
+	<script src="/js/jquery.fancyzoom.js"></script> 
+<script>
+$(document).ready(function() {
+        $("a.fancy").fancyZoom();
+    });
+</script>
 </head>
 <body>
 	<div id="header">

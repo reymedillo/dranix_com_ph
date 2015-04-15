@@ -10,7 +10,13 @@
 				echo $this->Form->input('subject', array('class'=>'form-control', 'required' => true));
 				echo $this->Form->input('description', array('class'=>'form-control','required' => true));
 				?>
-				<br>
+				<label>Department</label>
+				<select name="data[Memo][deptid]" class="form-control" id="MemoDeptid">
+				<option value="0"></option>
+				<?php foreach($department as $dept) { ?>
+                <option value="<?php echo $dept['Department']['id']; ?>"><?php echo $dept['Department']['description']; ?></option>
+                <?php } ?>
+                </select>
 				<h5>Upload Scanned Copy</h5>
 				<?php
 					echo $this->Form->input('upload', array('type' => 'file', 'label' => 'Memo','required' => true, 'accept' => 'image/jpeg,image/png'));

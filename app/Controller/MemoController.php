@@ -3,6 +3,10 @@ class MemoController extends AppController {
 
 
 public function post() {
+	$this->loadModel('Department');
+
+	$this->set('department', $this->Department->find('all', array('fields' => array('id', 'description'), 'order' => ['Department.id' => 'DESC'])));
+
 	//post data
 	if ($this->request->is('post')) {
 		$this->Memo->create();
@@ -14,7 +18,7 @@ public function post() {
 			&& is_uploaded_file($this->request->data['Memo']['upload']['tmp_name'])
 		) {
 			// Strip path information
-			$filename = substr(Security::generateAuthKey(),0,5).'_'.basename($this->request->data['Memo']['upload']['name']);
+			$filename = substr(Security::generateAuthKey(),0,5);
 			move_uploaded_file(
 				$this->data['Memo']['upload']['tmp_name'],
 				WWW_ROOT . 'files' . DS . $filename
@@ -41,11 +45,22 @@ public function post() {
 
 public function index() {
 	$this->loadModel('Memo');
-	// $memos = $this->Memo->find('all');
-	$memos = $this->Memo->find('all', array(
-		'conditions' => array('DATE_FORMAT(Memo.created,"%m") = "'.date("m").'"')
-	));
-	$this->set('memo', $memos);
+	if($this->Auth->loggedIn()) {
+		$memos = $this->Memo->find('all', array(
+			'conditions' => [
+				// 'DATE_FORMAT(Memo.created,"%m") = "'.date("m").'"',  //for filtering for current month
+				'Memo.deptid' => array(0,$this->Auth->user('deptid'))
+			],
+			'order' => [
+				'Memo.created' => 'DESC'
+			]
+		));
+		$this->set('memo', $memos);
+	}
+	else {
+		$this->Session->setFlash('You cannot access that page.');
+		$this->redirect('/');
+	}
 }
 
 public function view() {
