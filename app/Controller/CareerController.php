@@ -4,17 +4,40 @@ class CareerController extends AppController {
 	
 	public function beforeFilter(){
 		parent::beforeFilter();
-		$this->Auth->allow('apply');
+		$this->Auth->allow('apply','view','branches');
 	}
 
     public function index(){
 		$careers = $this->Career->find('all');
 		$this->set(compact('careers'));
+
       }
 	  
 	public function apply(){
 	
-      }
+    }
+    public function branches() {
+    	$this->loadModel('Branches');
+    	$branches = $this->Branches->find('all', array(
+    		'conditions' => array(
+    			'Branches.id !=' => array(3,4,5,19)
+    		)
+    	));
+    	if(isset($this->params['requested']))
+		{
+			return $branches;
+		}
+	 
+		$this->set('branches', $branches);
+    }
+    public function view($id) {
+    	$careers = $this->Career->find('all', array(
+    		'conditions' => array(
+    			'Career.branchid' => $id
+    		)
+    	));
+		$this->set(compact('careers'));
+    }
 	  
 	public function post(){
 		 if ($this->request->is('post')) {

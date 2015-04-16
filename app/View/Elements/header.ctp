@@ -1,4 +1,7 @@
-<?php $dir = Router::url('/'); ?>
+<?php 
+$dir = Router::url('/');
+$branches = $this->requestAction('/career/branches');
+?>
 <div style="margin-bottom:0px; border-bottom:2px solid #ea2f10;" class="navbar navbar-default">
   <div class="navbar-header">
 	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -25,7 +28,14 @@
 	  <?php if($loggedIn): ?>
 	  <li class="<?php if($this->here == $dir.'memo'){echo 'active';} ?>"  ><?php echo $this->Html->link('Memos', array('controller'=>'memo','action'=>'index'));?></li>
 	  <?php endif; ?>
-	  <li class="<?php if($this->here == $dir.'career'){echo 'active';} ?>"  ><?php echo $this->Html->link('Careers', array('controller'=>'career'));?></li>
+	  <li class="<?php if($this->here == $dir.'career'){echo 'active';} ?>">
+	  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Careers<b class="caret"></b></a>
+		<ul class="dropdown-menu">
+			<?php foreach($branches as $branch) { ?>
+			<li ><a href="/career/view/<?php echo $branch['Branches']['id']; ?>"><?php echo $branch['Branches']['branchname'] ?></a></li>
+			<?php } ?>
+		</ul>
+	  </li>
 	  <li class="<?php if($this->here == $dir.'contact'){echo 'active';} ?>"><?php echo $this->Html->link('Contact Us', array('controller'=>'contact'));?></li>
 
 	  <?php if($loggedIn): ?>
@@ -44,7 +54,7 @@
     <div class="panel panel-danger">
       <div class="panel-heading">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="panel-title">Dranix Employee Access</h4>
+        <h4 class="panel-title">Employee Access</h4>
       </div>
       <div class="panel-body">
         <div class="users form">
