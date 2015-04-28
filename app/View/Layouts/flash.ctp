@@ -33,6 +33,9 @@ A:HOVER { text-decoration: underline; color:#44E }
 --></style>
 </head>
 <body>
-<p><a href="<?php echo $url; ?>"><?php echo $message; ?></a></p>
+<div class="alert alert-dismissible alert-info">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <strong>Heads up!</strong> <?php echo $message; ?>
+</div>
 </body>
 </html>

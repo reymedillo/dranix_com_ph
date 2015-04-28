@@ -18,12 +18,28 @@ class User extends AppModel {
 				'message' => 'Usernames must be between 5 to 15 characters'
 			),
 			 'unique' => array(
-				'rule'    => array('isUniqueUsername'),
+				'rule'    => 'isUnique',
 				'message' => 'This username is already in use'
 			),
 			'alphaNumericDashUnderscore' => array(
 				'rule'    => array('alphaNumericDashUnderscore'),
 				'message' => 'Username can only be letters, numbers and underscores'
+			),
+        ),
+        'name' => array(
+            'nonEmpty' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'Name is required',
+				'allowEmpty' => false
+            ),
+			'between' => array( 
+				'rule' => array('between', 5, 100), 
+				'required' => true, 
+				'message' => 'Name must be between 5 to 100 characters'
+			),
+			'alphaNumeric' => array(
+				'rule'    => array('alphaNumericDashUnderscore'),
+				'message' => 'Name can only be letters, numbers and underscores'
 			),
         ),
         'password' => array(
@@ -47,6 +63,16 @@ class User extends AppModel {
 				'message' => 'Both passwords must match.'
 			)
         ),
+        'oldpassword' => array(
+			'null' => array(
+				'rule' => 'notEmpty',
+				'message' => 'Please enter password.'
+			),
+			'validate' => array(
+				'rule' => 'checkCurrentPassword',
+				'message' => 'Your old password is incorrect.'
+			)
+		),
 		
 		'email' => array(
 			'required' => array(
@@ -64,7 +90,7 @@ class User extends AppModel {
 		),
         'role' => array(
             'valid' => array(
-                'rule' => array('inList', array('king', 'queen', 'bishop', 'rook', 'knight', 'pawn')),
+                'rule' => array('inList', array('Admin', 'HR','Regular')),
                 'message' => 'Please enter a valid role',
                 'allowEmpty' => false
             )
@@ -87,7 +113,6 @@ class User extends AppModel {
 			)
         )
 
-		
     );
 	
 		/**
@@ -132,7 +157,7 @@ class User extends AppModel {
 			'first',
 			array(
 				'fields' => array(
-					'User.id'
+					'User.id','User.email'
 				),
 				'conditions' => array(
 					'User.email' => $check['email']
@@ -151,6 +176,12 @@ class User extends AppModel {
 		}
     }
 	
+	public function checkCurrentPassword($data) {
+    $this->id = AuthComponent::user('id');
+    $password = $this->field('password');
+    return(AuthComponent::password($data['oldpassword']) == $password);
+	} 
+
 	public function alphaNumericDashUnderscore($check) {
         // $data array is passed using the form field name as the key
         // have to extract the value to make the function generic
@@ -176,19 +207,25 @@ class User extends AppModel {
 	 * @param array $options
 	 * @return boolean
 	 */
-	 public function beforeSave($options = array()) {
-		// hash our password
-		if (isset($this->data[$this->alias]['password'])) {
-			$this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
-		}
+	//  public function beforeSave($options = array()) {
+	// 	// hash our password
+	// 	if (isset($this->data[$this->alias]['password'])) {
+	// 		$this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
+	// 	}
 		
-		// if we get a new password, hash it
-		if (isset($this->data[$this->alias]['password_update'])) {
-			$this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password_update']);
-		}
+	// 	// if we get a new password, hash it
+	// 	if (isset($this->data[$this->alias]['password_update'])) {
+	// 		$this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password_update']);
+	// 	}
 	
-		// fallback to our parent
-		return parent::beforeSave($options);
+	// 	// fallback to our parent
+	// 	return parent::beforeSave($options);
+	// }
+	public function beforeSave($options = array()) {
+	    if (isset($this->data[$this->alias]['password'])) {
+	        $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
+	    }
+	    return true;
 	}
 
 }

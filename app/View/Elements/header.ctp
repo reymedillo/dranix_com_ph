@@ -39,7 +39,13 @@ $branches = $this->requestAction('/career/branches');
 	  <li class="<?php if($this->here == $dir.'contact'){echo 'active';} ?>"><?php echo $this->Html->link('Contact Us', array('controller'=>'contact'));?></li>
 
 	  <?php if($loggedIn): ?>
-		<li class="<?php if($this->here == $dir.'contact'){echo 'active';} ?>"><?php echo $this->Html->link('Logout', array('controller'=>'users','action'=>'logout'));?></li>
+	  <li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user"></i></a>
+		<ul class="dropdown-menu">
+ 			<li class="<?php if($this->here == $dir.'contact'){echo 'active';} ?>"><?php echo $this->Html->link('Add User', array('controller'=>'users','action'=>'add'));?></li>
+ 			<li class="<?php if($this->here == $dir.'contact'){echo 'active';} ?>"><?php echo $this->Html->link('Change Password', array('controller'=>'users','action'=>'changepass'));?></li>
+ 			<li class="<?php if($this->here == $dir.'contact'){echo 'active';} ?>"><?php echo $this->Html->link('Logout', array('controller'=>'users','action'=>'logout'));?></li>
+		</ul>
+	  </li>
 	  <?php else: ?>
 	  	<li><a data-toggle="modal" href="#myModal"><i class="fa fa-lock"></i></a>
 	  	</li>
@@ -48,7 +54,7 @@ $branches = $this->requestAction('/career/branches');
   </div>
 </div>
 
-
+<!-- Login Modal -->
 <div class="modal" id="myModal" class="modal fade in">
   <div class="modal-dialog">
     <div class="panel panel-danger">

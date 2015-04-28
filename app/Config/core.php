@@ -194,7 +194,7 @@
 /**
  * A random string used in security hashing methods.
  */
-	Configure::write('Security.salt', 'test');
+	Configure::write('Security.salt','MSHlDhU9YykAXSGti4yLhAIwO35G75P7yWh4V70rgwEmOmA6WqvEeWjbHS2A9Y3');
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.

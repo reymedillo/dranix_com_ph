@@ -38,11 +38,14 @@
 class EmailConfig {
 
 	public $default = array(
-		'transport' => 'Mail',
-		'from' => 'you@localhost',
-		//'charset' => 'utf-8',
-		//'headerCharset' => 'utf-8',
-	);
+        'host' => 'ssl://smtp.gmail.com',
+        'port' => 465,
+//        'username' => 'hris_support@dranix.com.ph',
+//        'password' => 'ddiphnx1',
+        'username' => 'goldenkaizenholdings.hr@gmail.com',
+        'password' => 'ddiphnx1',
+        'transport' => 'Smtp'
+    );
 
 	public $smtp = array(
 		'transport' => 'Smtp',
