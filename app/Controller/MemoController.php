@@ -6,7 +6,7 @@ public function post() {
 	$this->loadModel('Department');
 
 	$this->set('department', $this->Department->find('all', array('fields' => array('id', 'description'), 'order' => ['Department.id' => 'DESC'])));
-
+if($this->Auth->user('role') == array('HR')) {
 	//post data
 	if ($this->request->is('post')) {
 		$this->Memo->create();
@@ -31,16 +31,22 @@ public function post() {
 
 		if($this->Auth->user('role') != 'pawn') {
 			if ($this->Memo->save($this->request->data)) {
-				$this->Session->setFlash('Your memo has been saved.');
+				$this->Session->setFlash('Your memo has been saved.','flash_notification');
 				$this->redirect('/');
 			} else {
-				$this->Session->setFlash('Unable to add your memo.');
+				$this->Session->setFlash('Unable to add your memo.','flash_notification');
 			}
 		}
 		else {
-			$this->Session->setFlash('You cannot add memo with your current permission.');
+			$this->Session->setFlash('You cannot add memo with your current permission.', 'flash_notification');
 		}
 	}	
+}
+else {
+	$this->Session->setFlash('HR Department are only allow to post memos.', 'flash_notification');
+	$this->redirect('/');
+}
+
 }
 
 public function index() {

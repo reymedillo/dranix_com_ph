@@ -14,7 +14,7 @@ class UsersController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
 		$this->Auth->deny('index','add');
-        $this->Auth->allow('login','logout','recover');
+        $this->Auth->allow('login','logout','recover','newpass');
     }
 	
 
@@ -61,6 +61,10 @@ class UsersController extends AppController {
 
 
     public function add() {
+    $this->loadModel('Department');
+	$this->set('department', $this->Department->find('all', array('fields' => array('id', 'description'), 'order' => ['Department.id' => 'DESC'])));
+   
+    if($this->Auth->user('role') == 'Admin') {
         if ($this->request->is('post')) {
         	$password = substr(str_shuffle('zxcvbmnlkjhgfdsapoiuytrewq'),0,8);
         	$this->request->data['User']['password'] = $password;
@@ -96,6 +100,11 @@ class UsersController extends AppController {
 			}	
         }
     }
+    else {
+    	$this->Session->setFlash(__('You have no access to that page.'),'flash_notification');
+    	$this->redirect('/');
+    }
+    }
 
     public function recover() {
     if($this->Auth->loggedIn()) {
@@ -109,10 +118,10 @@ class UsersController extends AppController {
         		)
         	));
         	if($recover) {
-        		$password = substr(str_shuffle('zxcvbmnlkjhgfdsapoiuytrewq'),0,8);
-        		$hashed = AuthComponent::password($password);
+        		$link = substr(str_shuffle('zXcVbMnLkJhGfDsApOiUyTrEwQ'),0,11);
+
 				$this->User->updateAll(
-					array('User.password' => "'$hashed'"),
+					array('User.recovery' => "'$link'"),
 				    array('User.email' => $this->data['User']['recover_email'])
 				);
 	        	$email = new CakeEmail();
@@ -126,12 +135,10 @@ class UsersController extends AppController {
 	        	$content = array();
 
 	        	array_push($content, 'Welcome to Dranix Distributors Inc. Website');
-	            array_push($content, 'Your Dranix Account info:');
-	            array_push($content, 'Username: ' . $recover['User']['username']);
-	            array_push($content, 'New Password: ' . $password);
 	            array_push($content, 'You may change your password after you login.');
-	            // array_push($content, 'To complete your registration to the Dranix Website please click on the link below');
-	            // array_push($content, '<a href="' . "http://hris.dranix.com.ph/users/accountActivation/?id=" . $this->User->getLastInsertID() . "&activation_code=" . $user['activation_key'] . '">Activate Your HRIS Account</a>');
+	            array_push($content, 'To set your new password please click on the link below');
+	            array_push($content, '<a href="' . "http://localhost/users/newpass/" . $link . '">Change Password</a>');
+	            array_push($content, '<a href="' . "http://localhost/users/newpass/" . $link . '">Change Password</a>');
 
 	            if (!$email->send($content)) {
 	    			$this->Session->setFlash(__('Problem in sending email for new user'),'flash_notification');
@@ -143,14 +150,7 @@ class UsersController extends AppController {
         	{
         		$this->Session->setFlash(__('Account does not exist.'),'flash_notification');
         		$this->redirect('/users/recover');
-        	}
-
-			// if ($this->User->save($this->request->data)) {
-			// 	$this->Session->setFlash(__('The user has been created'),'flash_notification');
-			// 	$this->redirect(array('action' => 'index'));
-			// } else {
-			// 	$this->Session->setFlash(__('The user could not be created. Please, try again.'),'flash_notification');
-			// }	
+        	}	
         }
     }
 
@@ -201,6 +201,28 @@ class UsersController extends AppController {
 					$this->Session->setFlash(__('Problem in changing password.'),'flash_notification');
 				}
 			}
+		}
+	}
+	public function newpass() {
+	    $recover_link = $this->User->find('first', array(
+			'conditions' => array(
+				'User.recovery' => $this->request->params['pass'][0]
+			)
+		)); 
+		if($recover_link){
+			if($this->request->is(array('post','put'))) {
+				$pass = AuthComponent::password($this->data['User']['password']);
+				$this->User->updateAll(
+					array('User.password' => "'$pass'",'User.recovery' => "''"),
+				    array('User.recovery' => $this->request->params['pass'][0])
+				);
+					$this->Session->setFlash(__('Password successfully changed.'),'flash_notification');
+					$this->redirect(array('action' => 'login'));
+			}
+		}
+		else {
+			$this->Session->setFlash(__('Link not found or expired.'),'flash_notification');
+			$this->redirect(array('action' => 'login'));
 		}
 	}	
 

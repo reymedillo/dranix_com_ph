@@ -41,7 +41,9 @@ $branches = $this->requestAction('/career/branches');
 	  <?php if($loggedIn): ?>
 	  <li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user"></i></a>
 		<ul class="dropdown-menu">
+			<?php if($current_user['role'] == 'Admin'): ?>
  			<li class="<?php if($this->here == $dir.'contact'){echo 'active';} ?>"><?php echo $this->Html->link('Add User', array('controller'=>'users','action'=>'add'));?></li>
+ 			<?php endif; ?>
  			<li class="<?php if($this->here == $dir.'contact'){echo 'active';} ?>"><?php echo $this->Html->link('Change Password', array('controller'=>'users','action'=>'changepass'));?></li>
  			<li class="<?php if($this->here == $dir.'contact'){echo 'active';} ?>"><?php echo $this->Html->link('Logout', array('controller'=>'users','action'=>'logout'));?></li>
 		</ul>
@@ -72,6 +74,8 @@ $branches = $this->requestAction('/career/branches');
 		?>
 		<br/>
 		<?php echo $this->Form->end(__('Login')); ?>
+		<br/>
+		<?php echo $this->Html->link('Forgot Password', array('controller'=>'users','action'=>'recover'));?>
 		</div>
       </div>
     </div>

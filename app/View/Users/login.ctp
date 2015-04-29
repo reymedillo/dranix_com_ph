@@ -18,9 +18,8 @@
 		<br/>	
 		<?php echo $this->Form->end(__('Login')); ?>	
 		</div>
-		<?php
-		 //echo $this->Html->link( "Add A New User",   array('action'=>'add') ); 
-		?>
+		<br/>
+		<?php echo $this->Html->link('Forgot Password', array('controller'=>'users','action'=>'recover'));?>
 		<br/>
 	  </div>
 	</div>
