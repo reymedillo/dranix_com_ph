@@ -37,7 +37,8 @@
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
 	Router::connect('/branch', array('controller' => 'branches', 'action' => 'index'));
-
+	Router::mapResources('inquiry');
+	Router::parseExtensions();
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.

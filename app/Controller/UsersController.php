@@ -5,6 +5,12 @@ App::uses('AuthComponent', 'Controller/Component');
 class UsersController extends AppController {
 	public $name = 'Users';
 
+	public $components = array(
+	    'Security' => array(
+	        'csrfCheck' => true
+	    )
+	);
+
 	public $paginate = array(
         'limit' => 25,
         'conditions' => array('status' => '1'),
@@ -12,11 +18,16 @@ class UsersController extends AppController {
     );
 	
     public function beforeFilter() {
+		$this->Security->blackHoleCallback = 'blackhole';
         parent::beforeFilter();
 		$this->Auth->deny('index','add');
         $this->Auth->allow('login','logout','recover','newpass');
     }
 	
+
+    public function blackhole($csrf) {
+	    // handle errors.
+	}
 
 	public function login() {
 		if($this->request->is(array('post')))
