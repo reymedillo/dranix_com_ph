@@ -36,7 +36,7 @@ class InquiryController extends AppController
 	        $this->set(array(
 	            'inq' => $inq,
 	            '_serialize' => array('inq'),
-			'_jsonp' => true
+				'_jsonp' => true
 	        ));
 		}
 	}
