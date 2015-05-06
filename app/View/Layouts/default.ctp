@@ -2,7 +2,7 @@
 $dranix = 'Dranix';
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
@@ -14,6 +14,15 @@ $dranix = 'Dranix';
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 	<!--[if lt IE 9]><?php echo $this->Html->script(array('html5shiv.js', 'respond.min.js')); ?><![endif]-->
+	
+	<!-- ANGULAR -->
+    <script src="/js/node_modules/angular/angular.min.js"></script>
+    <script src="/js/controllers/mainCtrl.js"></script>
+    <script src="/js/services/mainService.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/node_modules/moment.min.js"></script>
+    <script src="/js/node_modules/angular-moment.js"></script>
+		
 	<?php
 		echo $this->Html->meta('icon', Router::url('/', true).'img/dranix.icon.png');
 		echo $this->Html->css(array('font-awesome.min.css', 'yeti.css', 'css.css'));
@@ -32,7 +41,7 @@ $(document).ready(function() {
     });
 </script>
 </head>
-<body>
+<body ng-app="myApp">
 	<div id="header">
 		<?php echo $this->element('header'); ?>
 	</div>

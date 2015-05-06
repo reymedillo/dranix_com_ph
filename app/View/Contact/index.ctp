@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-controller="mainController">
 	<div class="col-md-12">
 		<br/>
 		<center><img style="width:100%;" src="<?php echo Router::url('/', true).'img/contact.png'; ?>"/></center>
@@ -27,15 +27,19 @@
 			<div class="alert alert-dismissable alert-info">
 				<h4>Submit an Inquiry</h4>
 				<hr/>
-				<?php 
-					echo $this->Form->create('Contact');
-					echo $this->Form->input('name', array('class'=>'form-control'));
-					echo $this->Form->input('email', array('class'=>'form-control'));
-					echo $this->Form->input('message', array('type'=>'textarea','class'=>'form-control'));
-					echo '<br/>';
-					echo $this->Form->submit('Send', array('class'=>'btn btn-primary'));
-					echo $this->Form->end();
-				?>
+				<div class="alert alert-dismissible alert-success" ng-show="successMsg">
+				  <strong>Well done!</strong> You've successfully sent you're inquiry.
+				</div>
+				<form ng-submit="submitInquiry()" method="post">
+					<label for="name">Name</label>
+					<input ng-model="inquiryData.name" name="inquiryName" class="form-control">
+					<label for="email">Email</label>
+					<input ng-model="inquiryData.email" name="inquiryEmail" class="form-control">
+					<label for="message">Message</label>
+					<textarea style="resize:none" ng-model="inquiryData.message" name="inquiryMessage" id="" cols="30" rows="5" class="form-control"></textarea>
+					<br>
+					<button type="submit" class="btn btn-success">Send</button>
+				</form>
 			</div>
 		</div>
 		<div class="col-md-6">

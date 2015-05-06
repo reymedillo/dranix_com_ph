@@ -37,14 +37,24 @@
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
 	Router::connect('/branch', array('controller' => 'branches', 'action' => 'index'));
-	Router::mapResources('inquiry');
-	Router::parseExtensions();
+
+    Router::resourceMap( array(
+        array( 'action' => 'index', 'method' => 'GET', 'id' => false ),
+        array( 'action' => 'view', 'method' => 'GET', 'id' => true ),
+        array( 'action' => 'add', 'method' => 'POST', 'id' => false),
+        array( 'action' => 'edit', 'method' => 'PUT', 'id' => true ),
+        array( 'action' => 'delete', 'method' => 'DELETE', 'id' => true ),
+    ));
+
+
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.
  */
 	CakePlugin::routes();
-
+	Router::mapResources('inquiry', array('prefix' => 'api'));
+	Router::mapResources('rapplicant', array('prefix' => 'api'));
+	Router::parseExtensions('json');
 /**
  * Load the CakePHP default routes. Only remove this if you do not want to use
  * the built-in default routes.

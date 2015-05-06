@@ -6,6 +6,11 @@ class ApplicantController extends AppController {
 		parent::beforeFilter();
 		$this->Auth->allow('apply');
 	}
+
+	public function index() {
+		
+	}
+	
 	public function apply($id=null){
 		$this->loadModel('Career');
 		// echo $id;
@@ -51,16 +56,10 @@ class ApplicantController extends AppController {
 				'Applicant.career_id' => $id			
 			)
 		));
+		
 		$this->set('applicant', $applicants);
+		return json_encode(Set::extract('/Applicant/.', $applicants));
 	}
-	// public function view($id=null) {
-	// 	$this->loadModel('Applicant');
-	// 	$person = $this->Applicant->find('first', array(
-	// 		'conditions' => array(
-	// 			'Applicant.id' => $id
-	// 		)
-	// 	));
-	// 	$this->set('person', $person);
-	// }
+
 }
 ?>

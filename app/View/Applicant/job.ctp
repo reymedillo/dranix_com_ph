@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-controller="mainController">
 <hr/>
 	<div class="col-md-9">
 		<div class="panel panel-primary">
@@ -6,6 +6,11 @@
 			<h3 class="panel-title">Applicants</h3>
 		  </div>
 		  <div class="panel-body">
+		  	<ul class="breadcrumb">
+			  <li class="active"><a href="#">Pending</a></li>
+			  <li><a href="#">Hired</a></li>
+			  <li>Rejected</li>
+			</ul>
 			<table class="table table-condensed table-hover">
 			<thead>
 				<tr>
@@ -17,7 +22,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<?php foreach($applicant as $applicants): ?>
+	<!-- 			<?php foreach($applicant as $applicants): ?>
 				<tr>
 				  <td><?php echo $applicants['Applicant']['name']; ?></td>
 				  <td><?php echo $applicants['Applicant']['email']; ?></td>
@@ -29,7 +34,7 @@
 				  <td><a href="<?php echo Router::url('/', false).'files/'.$applicants['Applicant']['upload'];?>">Download Resume</a></td>
  				</tr>
 				<?php endforeach; ?>
-			</tbody>
+			</tbody> -->
 			</table>
 		  </div>
 		</div>
