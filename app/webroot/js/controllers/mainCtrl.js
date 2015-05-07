@@ -4,6 +4,8 @@ angular.module('mainCtrl', [])
   $scope.successMsg = false;
   $scope.test = 'rei';
 
+  $scope.number = $
+
   $scope.applicants = [];
 
   Inquiry.get()
@@ -45,14 +47,13 @@ angular.module('mainCtrl', [])
     });
   };
 
-  $scope.predicate = '-id';
   $scope.showData = function(){
     $scope.curPage = 0;
-    $scope.pageSize = 3;
-
+    $scope.pageSize = 10;
+    
     $scope.numberOfPages = function() {
         return Math.ceil($scope.applicants.length / $scope.pageSize);
-    };    
+    };
   }
 
 });

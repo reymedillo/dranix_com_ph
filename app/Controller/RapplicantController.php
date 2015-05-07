@@ -8,29 +8,11 @@ class RapplicantController extends AppController
 	public $components = array('RequestHandler');
 	
 	function index() {
-		$this->loadModel('Applicant');
 		$this->loadModel('Career');
-
 		$this->autoRender = false;
-		// $career = $this->Career->find('all');
+		$career = $this->Career->find('all');
 
-		$career = $this->Career->find('all', array(
-			'joins' => array(
-				array('table' => 'applicants',
-		           'alias' => 'applicants',
-		           'type' => 'INNER',
-		           'conditions' => array('Career.title = applicants.job_title')
-           		)
-			),
-			'fields' => array(
-				'Career.*'
-			),
-			'group' => array('Career.id')
-		));
-
-
-		// return json_encode(Set::extract('/Applicant/.', $applicant));
-		return Debugger::dump($career);
+		 return json_encode(Set::extract('/Career/.', $career));
 	}
 	
 	// function add() {

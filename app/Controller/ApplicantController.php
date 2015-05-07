@@ -10,6 +10,12 @@ class ApplicantController extends AppController {
 	public function index() {
 		
 	}
+
+	public function status($id = null) {
+		$this->loadModel('Career');
+		$career = $this->Career->findById($id);
+		$this->set(compact('career',$career));
+	}
 	
 	public function apply($id=null){
 		$this->loadModel('Career');

@@ -22,6 +22,8 @@ $dranix = 'Dranix';
     <script src="/js/app.js"></script>
     <script src="/js/node_modules/moment.min.js"></script>
     <script src="/js/node_modules/angular-moment.js"></script>
+    <script src="/js/node_modules/dirPagination.js"></script>
+
 		
 	<?php
 		echo $this->Html->meta('icon', Router::url('/', true).'img/dranix.icon.png');
