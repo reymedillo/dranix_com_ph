@@ -1,6 +1,6 @@
 <?php 
 /**
-* Api for Inquiry
+* Api for Rapplicant
 */
 class RapplicantController extends AppController
 {
@@ -38,6 +38,18 @@ class RapplicantController extends AppController
 	// 	}
 	// }
 
+	function edit($id = null) {
+		$applicant = $this->Applicant->findById($id);
+		if($applicant) {
+			if($this->request->is('put')) {
+				$status = $this->data['Applicant']['statusid'];
+				$this->Applicant->updateAll(array(
+					array('Applicant.statusid' => "'$status'" ),
+					array('Applicant.id' => $id)
+				));
+			}
+		}
+	}
 }
 
 ?>

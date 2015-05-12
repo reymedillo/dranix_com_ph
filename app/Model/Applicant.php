@@ -2,8 +2,8 @@
 
 class Applicant extends AppModel {
 	// public $belongsTo = array(
-	// 	'ApplicantStatus' => array(
-	// 		'className' => 'ApplicantStatus',
+	// 	'Career' => array(
+	// 		'className' => 'Career',
 	// 		'foreignKey' => 'statusid'
 	// 	)
 	// );

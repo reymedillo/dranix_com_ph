@@ -225,7 +225,7 @@ class UsersController extends AppController {
 				$pass = AuthComponent::password($this->data['User']['password']);
 				$this->User->updateAll(
 					array('User.password' => "'$pass'",'User.recovery' => "''"),
-				    array('User.recovery' => $this->request->params['pass'][0])
+				    array('User.recovery' => $this->request->params['pass'][0]) // << conditions
 				);
 					$this->Session->setFlash(__('Password successfully changed.'),'flash_notification');
 					$this->redirect(array('action' => 'login'));

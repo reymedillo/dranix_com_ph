@@ -21,7 +21,7 @@
 			<tr dir-paginate="applicant in applicants | itemsPerPage: 10 track by $index">
 				<td>{[applicant.id]}</td>
 				<td><time title="{[applicant.created | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' ]}">{[applicant.created | amCalendar]}</time></td>
-				<td><a href="/applicant/status/{[applicant.id]}">{[applicant.title]}</a></td>
+				<td><a href="/applicants/folders/{[applicant.id]}">{[applicant.title]}</a></td>
 				<td>{[applicant.unprocessed]}</td>
 				<td>{[applicant.total]}</td>
 			</tr>

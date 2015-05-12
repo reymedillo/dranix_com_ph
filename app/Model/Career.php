@@ -1,5 +1,4 @@
 <?php
-//App::uses('AuthComponent', 'Controller/Component');
 
 class Career extends AppModel {
 	public $virtualFields = array(
@@ -11,6 +10,8 @@ class Career extends AppModel {
 		'rejected' => 'select count(statusid) from applicants where job_title = career.title and statusid=6',
 		'total' => 'select count(id) from applicants where job_title = career.title'
 	);
+
+	// public $hasOne = 'Applicant';
 }
 
 ?>

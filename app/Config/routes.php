@@ -54,6 +54,7 @@
 	CakePlugin::routes();
 	Router::mapResources('inquiry', array('prefix' => 'api'));
 	Router::mapResources('rapplicant', array('prefix' => 'api'));
+	Router::mapResources('resume', array('prefix' => 'api'));
 	Router::parseExtensions('json');
 /**
  * Load the CakePHP default routes. Only remove this if you do not want to use

@@ -27,7 +27,7 @@ $branches = $this->requestAction('/career/branches');
 	  <li class="<?php if($this->here == $dir.'news'){echo 'active';} ?>"  ><?php echo $this->Html->link('News & Events', array('controller'=>'news'));?></li>
 	  <?php if($loggedIn): ?>
 	  <li class="<?php if($this->here == $dir.'memo'){echo 'active';} ?>"  ><?php echo $this->Html->link('Memos', array('controller'=>'memo','action'=>'index'));?></li>
-	  <li class="<?php if($this->here == $dir.'applicant'){echo 'active';} ?>"  ><?php echo $this->Html->link('Applications', array('controller'=>'applicant','action'=>'index'));?></li>
+	  <li class="<?php if($this->here == $dir.'applicants'){echo 'active';} ?>"  ><?php echo $this->Html->link('Applications', array('controller'=>'applicants','action'=>'index'));?></li>
 	  <?php endif; ?>
 	  <li class="<?php if($this->here == $dir.'career'){echo 'active';} ?>">
 	  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Careers<b class="caret"></b></a>

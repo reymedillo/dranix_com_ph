@@ -4,8 +4,6 @@ angular.module('mainCtrl', [])
   $scope.successMsg = false;
   $scope.test = 'rei';
 
-  $scope.number = $
-
   $scope.applicants = [];
 
   Inquiry.get()
@@ -13,6 +11,8 @@ angular.module('mainCtrl', [])
       $scope.inqs = data;
       $scope.loading = false;
   });
+
+    
 
   Inquiry.getApplicant()
     .success(function(data) {
@@ -28,7 +28,7 @@ angular.module('mainCtrl', [])
   };
   // object to hold all the data for the new comment form
   $scope.inquiryData = {};
-
+ 
   // loading variable to show the spinning loading icon
   $scope.loading = true;
 
@@ -45,6 +45,18 @@ angular.module('mainCtrl', [])
       .error(function(data) {
         console.log(data);
     });
+  };
+
+  $scope.updateStatus = function(id) {
+    // update the status of applicant
+    Inquiry.updateStatus(id)
+    .success(function(data) {
+      $scope.loading = true;
+      Inquiry.get()
+        .success(function(getData) {
+          $scope.inqs = getData;
+      });
+    })
   };
 
   $scope.showData = function(){
