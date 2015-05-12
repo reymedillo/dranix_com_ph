@@ -10,7 +10,7 @@
 		  		<center>No records found.</center>
 			<?php else: ?>
 			<table class="table table-condensed table-hover">
-			<?php echo $this->Form->create('Applicant',array('action' => 'view', 'id' => 'FrmApplicant')); ?>
+			<?php echo $this->Form->create('Applicant',array('action' => 'view', 'id' => 'FrmApplicant','method' => 'post')); ?>
 			<thead>
 				<tr>
 					<th>Name</th>
@@ -33,6 +33,7 @@
 				</tr>
 			</thead>
 			<tbody>
+			<fieldset>
 	 			<?php foreach($applicant as $applicants): ?>
 				<tr>
 				  <td><?php echo $applicants['Applicant']['name']; ?>
@@ -45,10 +46,11 @@
 				  echo $date->format('m-d-Y'); 
 				  ?></td>
 				  <td>
-				  	<input type="checkbox">
+				  	<input type="checkbox" name="check[]">
 				  </td>
  				</tr>
 				<?php endforeach; ?>
+				</fieldset>
 			</tbody>
 			<?php echo $this->Form->end(); ?>
 			</table>

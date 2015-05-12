@@ -39,13 +39,19 @@ class ApplicantsController extends AppController {
 			)
 		));
 		if($this->request->is(array('post'))) {
+
 			for($i=0;$i<count($this->data['Applicant']['id']);$i++) {
-				$status = 2;
-				$this->Applicant->updateAll(
-					array('Applicant.statusid' => "'$status'"),
-				    array('Applicant.id' => $this->data['Applicant']['id'][$i]) // << conditions
-				);
+				// for($x=0;$x<count(isset($_POST['check']));$x++) {
+					if(isset($_POST['check'][$i])) {
+						$status = 2;
+						$this->Applicant->updateAll(
+							array('Applicant.statusid' => "'$status'"),
+						    array('Applicant.id' => $this->data['Applicant']['id'][$i]) // << conditions
+						);
+					}
+				// }
 			}
+
 			$this->redirect(array('action' => 'index'));
 		}
 		else {
