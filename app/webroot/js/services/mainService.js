@@ -13,11 +13,22 @@ angular.module('mainService', [])
                 data: $.param(inquiryData)
             });
         },
+        saveCart : function(cartData) {
+          return $http({
+            method: 'POST',
+            url: 'api/cart',
+            headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+            data: $.param(cartData)
+          });
+        },
         getApplicant : function() {
             return $http.get('api/rapplicant');
         },
         getResume : function() {
             return $http.get('api/resume');
+        },
+        getProducts : function() {
+          return $http.get('api/products');
         },
         updateStatus : function(resumeData) {
            return $http({method:'PUT',url:'api/resume/' + resumeData.id,headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },

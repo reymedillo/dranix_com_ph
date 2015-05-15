@@ -11,25 +11,22 @@
 			<?php else: ?>
 			<table class="table table-condensed table-hover">
 			<?php echo $this->Form->create('Applicant',array('action' => 'view', 'id' => 'FrmApplicant','method' => 'post')); ?>
+			<input type="hidden" name="data[Applicant][pass1]" value="<?php echo $this->request->params['pass'][0]; ?>">
+			<input type="hidden" name="data[Applicant][pass2]" value="<?php echo $this->request->params['pass'][1]; ?>">
 			<thead>
 				<tr>
 					<th>Name</th>
 					<th>Email</th>
 					<th>Contact No.</th>
 					<th>Submitted</th>
-					<th>
-						<div class="btn-group">
-						    <a href="#" class="btn btn-default btn-xs" data-toggle="dropdown" aria-expanded="true">Action  <span class="caret"></span>
-						    </a>
-						    <ul class="dropdown-menu">
-						        <li><a href="" onclick="document.getElementById('FrmApplicant').submit();">Prescreen</a></li>
-						        <li><a href="" onclick="document.getElementById('FrmApplicant').submit();">Shortlist</a></li>
-						        <li><a href="" onclick="document.getElementById('FrmApplicant').submit();">Hired</a></li>
-						        <li><a href="" onclick="document.getElementById('FrmApplicant').submit();">Keep for Reference</a></li>
-						        <li><a href="" onclick="document.getElementById('FrmApplicant').submit();">Reject</a></li>
-						    </ul>
-						</div>
-				    </th>
+					<th></th>
+				</tr>
+				<tr>
+					<button class="btn btn-default btn-xs pull-right" type="submit" name="btn[]" value="4"><i class="fa fa-floppy-o"></i> Keep for Reference</button>
+					<button class="btn btn-default btn-xs pull-right" type="submit" name="btn[]" value="3"><i class="fa fa-list-ul"></i> Shortlist</button>
+					<button class="btn btn-default btn-xs pull-right" type="submit" name="btn[]" value="2"><i class="fa fa-eye"></i> Prescreen</button>
+					<button class="btn btn-default btn-xs pull-right" type="submit" name="btn[]" value="4"><i class="fa fa-close"></i> Reject</button>
+					<button class="btn btn-default btn-xs pull-right" type="submit" name="btn[]" value="4"><i class="fa fa-check"></i> Hire</button>
 				</tr>
 			</thead>
 			<tbody>
@@ -37,7 +34,7 @@
 	 			<?php foreach($applicant as $applicants): ?>
 				<tr>
 				  <td><?php echo $applicants['Applicant']['name']; ?>
-				 	<input type="text" name="data[Applicant][id][]" value="<?php echo $applicants['Applicant']['id']; ?>">
+				 	<input type="hidden" name="data[Applicant][id][]" value="<?php echo $applicants['Applicant']['id']; ?>">
 				  </td>
 				  <td><?php echo $applicants['Applicant']['email']; ?></td>
 				  <td><?php echo $applicants['Applicant']['contactno']; ?></td>
@@ -46,7 +43,7 @@
 				  echo $date->format('m-d-Y'); 
 				  ?></td>
 				  <td>
-				  	<input type="checkbox" name="check[]">
+				  	<input name="checkbox[]" required type="checkbox" id="checkbox[]" value="<?php echo $applicants['Applicant']['id']; ?>">
 				  </td>
  				</tr>
 				<?php endforeach; ?>

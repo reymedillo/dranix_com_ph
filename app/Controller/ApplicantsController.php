@@ -39,20 +39,20 @@ class ApplicantsController extends AppController {
 			)
 		));
 		if($this->request->is(array('post'))) {
-
-			for($i=0;$i<count($this->data['Applicant']['id']);$i++) {
-				// for($x=0;$x<count(isset($_POST['check']));$x++) {
-					if(isset($_POST['check'][$i])) {
+			if(count($_POST['checkbox']) > 0) {
+				foreach($_POST['checkbox'] as $check) {
+					foreach($_POST['btn'] as $button) {
 						$status = 2;
-						$this->Applicant->updateAll(
-							array('Applicant.statusid' => "'$status'"),
-						    array('Applicant.id' => $this->data['Applicant']['id'][$i]) // << conditions
+						$update = $this->Applicant->updateAll(
+							array('Applicant.statusid' => "'$button'"),
+						    array('Applicant.id' => $check) // << conditions
 						);
 					}
-				// }
+				}
 			}
-
-			$this->redirect(array('action' => 'index'));
+			if($update) {
+				$this->redirect(array('action' => 'folders',$this->data['Applicant']['pass1']));
+			}
 		}
 		else {
 			if(!$career_name || !$status_name) {

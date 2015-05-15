@@ -9,10 +9,10 @@ $dranix = 'Dranix';
 		<?php echo $dranix; ?>:
 		<?php echo $title_for_layout; ?>
 	</title>
-	<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
 	<link rel="stylesheet" href="/css/fancyzoom.css"/>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="/js/node_modules/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.css"/>
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery-ui.min.js"></script>
 	<!--[if lt IE 9]><?php echo $this->Html->script(array('html5shiv.js', 'respond.min.js')); ?><![endif]-->
 	
 	<!-- ANGULAR -->
@@ -23,25 +23,24 @@ $dranix = 'Dranix';
     <script src="/js/node_modules/moment.min.js"></script>
     <script src="/js/node_modules/angular-moment.js"></script>
     <script src="/js/node_modules/dirPagination.js"></script>
-
-		
+	<script src="/js/jquery.fancyzoom.js"></script>
+	<script src="/js/node_modules/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.js"></script>
+	<script>
+// $(document).ready(function() {
+// 	$(".fancy").fancyZoom();
+// });
+</script>	
 	<?php
 		echo $this->Html->meta('icon', Router::url('/', true).'img/dranix.icon.png');
 		echo $this->Html->css(array('font-awesome.min.css', 'yeti.css', 'css.css'));
 		echo $this->Html->script(array('bootstrap.min.js'));
 		echo $this->Html->script('tiny_mce/tiny_mce.js', array('inline' => false));
-		echo $this->Html->script(array('js.js'));
+		echo $this->Html->script(array('js.js', 'ui-bootstrap-tpls-0.9.0.js'));
 	?>
 	
 	<?php echo $this->fetch('meta'); ?>
 	<?php echo $this->fetch('css'); ?>
 	<?php echo $this->fetch('script'); ?>	
-	<script src="/js/jquery.fancyzoom.js"></script> 
-<script>
-$(document).ready(function() {
-        $("a.fancy").fancyZoom();
-    });
-</script>
 </head>
 <body ng-app="myApp">
 	<div id="header">

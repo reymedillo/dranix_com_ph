@@ -10,6 +10,16 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     <div class="item active">
+      <a href="/products"><img src="img/rs5.png" ></a>
+      <div class="carousel-caption">
+    <div class="col-md-12 carousel_header">
+      <a href="/products" style="text-decoration:none"><h1>EMPLOYEE SALE LUMINARC PRODUCTS</h1></a>
+      <h3>FOR DRANIX EMPLOYEES ONLY!</h3>
+    </div>
+      </div>
+    </div>
+
+    <div class="item">
       <img src="img/rs1.png" >
       <div class="carousel-caption">
 		<div class="col-md-12 carousel_header">

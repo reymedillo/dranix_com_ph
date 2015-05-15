@@ -1,17 +1,24 @@
 angular.module('mainCtrl', [])
 
-.controller('mainController', function($scope, $http, Inquiry, $location) { 
+.controller('mainController', function($scope, $http, Inquiry, $location, Lightbox) { 
   $scope.successMsg = false;
   $scope.test = 'rei';
 
   $scope.applicants = [];
 
-  Inquiry.get()
-    .success(function(data) {
-      $scope.inqs = data;
-      $scope.loading = false;
-  });
 
+
+Inquiry.get()
+  .success(function(data) {
+    $scope.inqs = data;
+    $scope.loading = false;
+});
+
+Inquiry.getProducts()
+  .success(function(data) {
+    $scope.products = data;
+    $scope.loading = false;
+});
     
 
   Inquiry.getApplicant()
@@ -19,6 +26,8 @@ angular.module('mainCtrl', [])
       $scope.applicants = data;
   });
     
+
+
   $scope.getInquiry = function() {
   $scope.loading = true;
   Inquiry.get()
@@ -33,6 +42,20 @@ angular.module('mainCtrl', [])
   $scope.loading = true;
 
   // function to handle submitting the form
+  $scope.submitInquiry = function() {
+    $scope.loading = true;
+    // save the comment. pass in comment data from the form
+    Inquiry.save($scope.inquiryData)
+      .success(function(data) {
+        $scope.successMsg = true;
+        $scope.inquiryData = {};
+        window.location.replace('/contact');
+      })
+      .error(function(data) {
+        console.log(data);
+    });
+  };
+
   $scope.submitInquiry = function() {
     $scope.loading = true;
     // save the comment. pass in comment data from the form
@@ -66,6 +89,11 @@ angular.module('mainCtrl', [])
     $scope.numberOfPages = function() {
         return Math.ceil($scope.applicants.length / $scope.pageSize);
     };
-  }
+  };
+
+  $scope.openLightboxModal = function (index) {
+
+    Lightbox.openModal($scope.products, index);
+  };
 
 });
