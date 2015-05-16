@@ -27,6 +27,7 @@
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
 	//Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+
 	Router::connect('/', array('controller' => 'home', 'action' => 'index'));
 	Router::connect('/branch', array('controller' => 'branches', 'action' => 'index'));
 /**
@@ -56,7 +57,7 @@
 	Router::mapResources('rapplicant', array('prefix' => 'api'));
 	Router::mapResources('resume', array('prefix' => 'api'));
 	Router::mapResources('products', array('prefix' => 'api'));
-	Router::mapResources('cart');
+	Router::mapResources('carts');
 	Router::parseExtensions('json');
 /**
  * Load the CakePHP default routes. Only remove this if you do not want to use

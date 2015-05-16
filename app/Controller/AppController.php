@@ -49,9 +49,12 @@ class AppController extends Controller {
 	}
 	
 	public function beforeFilter(){
+		$this->Session->write('drnxSession', String::uuid());
 		$this->Auth->allow('index','add');
 		$this->set('current_user', $this->Auth->user());
 		$this->set('loggedIn', $this->Auth->loggedIn());
 	}
+
 	
 }
+
