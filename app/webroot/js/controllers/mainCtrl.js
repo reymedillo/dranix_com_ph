@@ -96,7 +96,7 @@ $scope.submitCart = function(product) {
     // update the status of applicant
     Inquiry.updateStatus(id)
     .success(function(data) {
-      $scope.loading = true;
+      data.total = 100;
       Inquiry.get()
         .success(function(getData) {
           $scope.inqs = getData;
@@ -104,18 +104,39 @@ $scope.submitCart = function(product) {
     })
   };
 
-  $scope.showData = function(){
-    $scope.curPage = 0;
-    $scope.pageSize = 10;
-    
-    $scope.numberOfPages = function() {
-        return Math.ceil($scope.applicants.length / $scope.pageSize);
-    };
-  };
+$scope.updateQty = function(data) {
+  Inquiry.updateCart(data)
+    .success(function(data) {
+    Inquiry.getCarts()
+      .success(function(data) {
+      $scope.carts = data;
+    });
+    })
+    .error(function(data) {
+      console.log(data);
+    });
+};
 
-  $scope.openLightboxModal = function (index) {
-
-    Lightbox.openModal($scope.products, index);
+$scope.showData = function(){
+  $scope.curPage = 0;
+  $scope.pageSize = 10;
+  
+  $scope.numberOfPages = function() {
+      return Math.ceil($scope.applicants.length / $scope.pageSize);
   };
+};
+
+$scope.openLightboxModal = function (index) {
+
+  Lightbox.openModal($scope.products, index);
+};
+
+$scope.netTotal = function() {
+  var total = 0;
+  angular.forEach($scope.carts, function(cart) {
+      total += cart.qty*cart.price;
+  })
+  return total;
+};
 
 });

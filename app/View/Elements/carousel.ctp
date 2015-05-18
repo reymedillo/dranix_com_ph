@@ -13,7 +13,7 @@
       <a href="/products"><img src="img/rs5.png" ></a>
       <div class="carousel-caption">
     <div class="col-md-12 carousel_header">
-      <a href="/products" style="text-decoration:none"><h1>EMPLOYEE SALE LUMINARC PRODUCTS</h1></a>
+      <a href="/shop" style="text-decoration:none"><h1>FOR SALE LUMINARC PRODUCTS</h1></a>
       <h3>FOR DRANIX EMPLOYEES ONLY!</h3>
     </div>
       </div>

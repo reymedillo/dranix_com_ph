@@ -36,15 +36,37 @@
 									    </tr>
 									  </thead>
 									  <tbody>
-									    <tr ng-repeat="cart in carts">
+									    <tr ng-repeat="cart in carts track by $index">
 									      <td>{{$index}}</td>
-									      <td>{{cart.itemName}}</td>
-									      <td>
-									      	<select ng-options="list.id as list.value for list in listQty" ng-model="cart.qty">
-                            				</select>
+									      <td>{{cart.itemName}}
+									      	<input type="hidden" name="data[orderDetails][itemId]" value="cart.itemId">
 									      </td>
-									      <td>{{cart.price}}</td>
-									      <td>{{cart.total}}</td>
+									      <td>
+									      	<select ng-model="cart.qty" ng-options="list.id as list.value for list in listQty track by list.value" ng-change="updateQty(cart)">
+									      	   <option style="display:none" value="">{{cart.qty}}</option>
+                            				</select>
+                            				<input type="hidden" name="data[orderDetails][qty]" value="{{cart.qty}}">
+									      </td>
+									      <td>{{cart.price}}
+									      	<input type="hidden" name="data[orderDetails][price]" value="{{cart.price}}">
+									      </td>
+									      <td>{{cart.total}}
+									      	<input type="hidden" name="data[orderDetails][total]" value="{{cart.total}}">
+									      </td>
+									    </tr>
+									    <tr>
+									    	<td>Total</td>
+									    	<td></td>
+									    	<td></td>
+									    	<td></td>
+									    	<td>{{netTotal()}}</td>
+									    </tr>
+									    <tr>
+									    	<td></td>
+									    	<td></td>
+									    	<td></td>
+									    	<td></td>
+									    	<td><button class="btn btn-default btn-xs pull-right" type="submit" name="btn[]" value="4"><i class="fa fa-sign-out"></i> Checkout</button></td>
 									    </tr>
 									  </tbody>
 									</table>
