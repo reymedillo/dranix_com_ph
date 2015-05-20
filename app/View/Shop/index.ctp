@@ -3,9 +3,10 @@
 		<br/>
 		<center></center>
 		<h3>Products</h3>
+		<?php echo CakeSession::read('Config.userAgent'); ?>
 		<hr/>
-		<div class="col-md-4">
-			<div style="min-height:220px;" ng-init="product.session='<?php echo CakeSession::read('Config.userAgent'); ?>'" class="panel panel-info" ng-repeat="product in products">
+		<div class="col-md-4" ng-repeat="product in products">
+			<div style="min-height:220px;" ng-init="product.session='<?php echo CakeSession::read('Config.userAgent'); ?>'" class="panel panel-info" >
 			  <div class="panel-heading">
 				<h3 class="panel-title">{{product.name}}</h3>
 			  </div>

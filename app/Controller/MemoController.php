@@ -6,7 +6,7 @@ public function post() {
 	$this->loadModel('Department');
 
 	$this->set('department', $this->Department->find('all', array('fields' => array('id', 'description'), 'order' => ['Department.id' => 'DESC'])));
-if($this->Auth->user('role') == array('HR')) {
+	if($this->Auth->user('role') == array('HR')) {
 	//post data
 	if ($this->request->is('post')) {
 		$this->Memo->create();

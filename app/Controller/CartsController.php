@@ -1,5 +1,10 @@
 <?php 
+App::uses('CakeSession', 'Model/Datasource');
+
 class CartsController extends AppController {
+
+public $helpers = array('Html', 'Form');
+public $components = array('RequestHandler');
 
 public function beforeFilter() {
     $this->Auth->allow('index','add','edit');
@@ -9,13 +14,14 @@ public function index() {
 	$this->autoRender = false;
 	$this->loadModel('Cart');
 	$session = $this->Cart->find('all', array(
-			'conditions' => array(
-				'Cart.session' => CakeSession::read('Config.userAgent')
-			)
+		'conditions' => array(
+			'Cart.session' => CakeSession::read('Config.userAgent')
+		)
 	));
-	if($session) {
-		return json_encode(Set::extract('/Cart/.',$session));
-	}
+	// if($session) {
+	// 	return json_encode(Set::extract('/Cart/.',$session));
+	// }
+	echo $this->Session->read();
 }
 
 public function add() {
