@@ -7,7 +7,7 @@ public $helpers = array('Html', 'Form');
 public $components = array('RequestHandler');
 
 public function beforeFilter() {
-    $this->Auth->allow('index','add','edit');
+    $this->Auth->allow('index','add','edit','delete');
 }
 
 public function index() {
@@ -15,13 +15,12 @@ public function index() {
 	$this->loadModel('Cart');
 	$session = $this->Cart->find('all', array(
 		'conditions' => array(
-			'Cart.session' => CakeSession::read('Config.userAgent')
+			'Cart.session' => md5(env('HTTP_USER_AGENT') . Configure::read('Security.salt'))
 		)
 	));
-	// if($session) {
-	// 	return json_encode(Set::extract('/Cart/.',$session));
-	// }
-	echo $this->Session->read();
+	if($session) {
+		return json_encode(Set::extract('/Cart/.',$session));
+	}
 }
 
 public function add() {
@@ -49,6 +48,26 @@ public function edit($id) {
             'type' => 'success'
         );
     } else {
+        $message = array(
+            'text' => __('Error'),
+            'type' => 'error'
+        );
+    }
+    $this->set(array(
+        'message' => $message,
+        '_serialize' => array('message')
+    ));
+}
+
+public function delete($id) {
+	$this->autoRender = false;
+	$this->loadModel('Cart');
+	if($this->Cart->delete($id)) {
+        $message = array(
+            'text' => __('Saved'),
+            'type' => 'success'
+        );		
+	} else {
         $message = array(
             'text' => __('Error'),
             'type' => 'error'

@@ -26,10 +26,10 @@ $dranix = 'Dranix';
 	<script src="/js/jquery.fancyzoom.js"></script>
 	<script src="/js/node_modules/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.js"></script>
 	<script>
-// $(document).ready(function() {
-// 	$(".fancy").fancyZoom();
-// });
-</script>	
+	$(document).ready(function() {
+		$(".fancy").fancyZoom();
+	});
+	</script>	
 	<?php
 		echo $this->Html->meta('icon', Router::url('/', true).'img/dranix.icon.png');
 		echo $this->Html->css(array('font-awesome.min.css', 'yeti.css', 'css.css'));

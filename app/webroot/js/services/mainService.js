@@ -35,7 +35,7 @@ angular.module('mainService', [])
           }
           return str.join("&");
           },
-          data: {itemId:product.id, itemName:product.name ,qty:1, price:product.price, total:product.price, session: product.session}
+          data: {itemId:product.id, itemName:product.name, uom1:product.uom1, uom2:product.uom2 ,qty:1, price:product.price, total:product.price, session: product.session}
       });
     },
     getCarts : function() {
@@ -71,6 +71,9 @@ angular.module('mainService', [])
        },
        data: resumeData
       });
+    },
+    deleteCart : function(cart) {
+      return $http.delete('carts/' + cart.id);
     },
     updateCart : function(cart) {
       return $http({method:'PUT',url:'carts/' + cart.id,headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },

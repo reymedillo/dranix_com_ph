@@ -117,6 +117,16 @@ $scope.updateQty = function(data) {
     });
 };
 
+$scope.deleteItem = function(data) {
+  Inquiry.deleteCart(data)
+    .success(function(data) {
+    Inquiry.getCarts()
+      .success(function(data) {
+      $scope.carts = data;
+    });
+  });
+};
+
 $scope.showData = function(){
   $scope.curPage = 0;
   $scope.pageSize = 10;
