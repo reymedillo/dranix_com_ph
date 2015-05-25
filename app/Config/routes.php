@@ -38,6 +38,7 @@
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
 	Router::connect('/branch', array('controller' => 'branches', 'action' => 'index'));
+	Router::connect('/uom', array('controller' => 'uom', 'action' => 'index'));
 
     Router::resourceMap( array(
         array( 'action' => 'index', 'method' => 'GET', 'id' => false ),

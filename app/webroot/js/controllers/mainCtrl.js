@@ -3,7 +3,8 @@ angular.module('mainCtrl', [])
 .controller('mainController', function($scope, $http, Inquiry, $location, Lightbox) { 
   $scope.successMsg = false;
   $scope.test = 'rei';
-  $scope.listQty = [{id:1,value:1},{id:2,value:2},{id:3,value:3}];     
+  $scope.listQty = [{id:1,value:1},{id:2,value:2},{id:3,value:3}];
+  $scope.newPrice = '0';  
 
   $scope.applicants = [];
   $scope.cartData = {};
@@ -115,6 +116,33 @@ $scope.updateQty = function(data) {
     .error(function(data) {
       console.log(data);
     });
+};
+$scope.updateUom = function(data) {
+  Inquiry.updateUom(data)
+    .success(function(data) {
+    Inquiry.getCarts()
+      .success(function(data) {
+      $scope.carts = data;
+    });
+  })
+  .error(function(data) {
+    console.log(data);
+  });
+};
+$scope.updatePrice = function(id,itemId,uom,qty) {
+  Inquiry.getUom(itemId,uom)
+    .success(function(getData) {
+    Inquiry.updatePrice(id,getData[0].price,qty)
+      .success(function(data) {
+      Inquiry.getCarts()
+        .success(function(data) {
+        $scope.carts = data;
+      });
+    })
+    .error(function(data) {
+      console.log(data);
+    });
+  });
 };
 
 $scope.deleteItem = function(data) {

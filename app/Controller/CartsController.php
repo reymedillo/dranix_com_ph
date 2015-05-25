@@ -1,5 +1,4 @@
 <?php 
-App::uses('CakeSession', 'Model/Datasource');
 
 class CartsController extends AppController {
 
@@ -7,7 +6,7 @@ public $helpers = array('Html', 'Form');
 public $components = array('RequestHandler');
 
 public function beforeFilter() {
-    $this->Auth->allow('index','add','edit','delete');
+    $this->Auth->allow('index','add','edit','delete','update');
 }
 
 public function index() {
@@ -68,6 +67,35 @@ public function delete($id) {
             'type' => 'success'
         );		
 	} else {
+        $message = array(
+            'text' => __('Error'),
+            'type' => 'error'
+        );
+    }
+    $this->set(array(
+        'message' => $message,
+        '_serialize' => array('message')
+    ));
+}
+
+public function update($id,$uom) {
+    $this->loadModel('Uom');
+    $this->loadModel('Cart');
+    $this->autoRender = false;
+    $uom = $this->Uom->find('all', array(
+        'conditions' => array(
+            'Uom.itemId' => $id,
+            'Uom.uomName' => $uom
+        )
+    ));
+
+    $this->Cart->id = $id;
+    if ($this->Cart->save($this->request->data)) {
+        $message = array(
+            'text' => __('Saved'),
+            'type' => 'success'
+        );
+    } else {
         $message = array(
             'text' => __('Error'),
             'type' => 'error'

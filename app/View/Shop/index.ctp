@@ -55,7 +55,8 @@
             				<input type="hidden" name="orderDetail[qty][]" value="{{cart.qty}}">
 					      </td>
 					      <td>
-					      	<select name="orderDetail[uom][]">
+					      	<select name="orderDetail[uom][]" ng-model="cart.uom" ng-change="updateUom(cart);updatePrice(cart.id,cart.itemId,cart.uom,cart.qty)">
+					      		<option style="display:none" value="">{{cart.uom}}</option>
 					      		<option value="{{cart.uom1}}">{{cart.uom1}}</option>
 					      		<option value="{{cart.uom2}}">{{cart.uom2}}</option>
 					      	</select>

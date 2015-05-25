@@ -21,7 +21,9 @@ public function index() {
 	   //      	$email->template('default',null);
 	   //      	$email->emailFormat(null);
 	   //      	$email->from(array('itsupport@dranix.com.ph' => 'Dranix Distributors Website'));
-	   //      	$email->to('rmmedillo@dranix.com.ph');
+	   //      	$email->to(array('rmmedillo@dranix.com.ph','reyvie_xxx@yahoo.com'));
+	   //      	$recepients = ['rmmedillo@dranix.com.ph','reyvie_xxx@yahoo.com'];
+
 	   //      	$email->subject('Orders for Luminarc from '.$this->Auth->user('name'));
     //     		$content = array();
     //     		array_push($content, 'To whom it may concern:');
@@ -46,7 +48,7 @@ public function index() {
 							'total' => $_POST['orderDetail']['total'][$i],
 							'employeeName' => $_POST['orderDetail']['employeeName'][$i]
 						);
-						// array_push($content, $i.'. '.$_POST['orderDetail']['cartName'][$i].'     UoM:'.$_POST['orderDetail']['uom'][$i].'     Qty:'.$_POST['orderDetail']['qty'][$i].'     Price:'.$_POST['orderDetail']['price'][$i].'     Total:'.$_POST['orderDetail']['total'][$i]);
+						// array_push($content, $i.'. '.$_POST['orderDetail']['cartName'][$i].'     UoM:'.$_POST['orderDetail']['uom'][$i].'     Qty:'.$_POST['orderDetail']['qty'][$i].'     Price:'.$_POST['orderDetail']['price'][$i].'     Total:'.$_POST['orderDetail']['total'][$i].'     Employee: '.$_POST['orderDetail']['employeeName'][$i]);
 						$this->orderDetail->create();
 						$this->orderDetail->save($detail);
 						$this->Cart->delete($_POST['orderDetail']['cartId']);
@@ -57,10 +59,10 @@ public function index() {
 					// array_push($content, '');
 					// array_push($content, 'Regards,');
 					// array_push($content, $this->Auth->user('name'));
-		   //          if (!$email->send($content)) {
-		   //              $this->Session->setFlash(__('Problem in sending email for your order.'),'flash_notification');
-					// 	$this->redirect(array('action' => 'index'));
-		   //          }
+		    //         if (!$email->send($content)) {
+		    //             $this->Session->setFlash(__('Problem in sending email for your order.'),'flash_notification');
+						// $this->redirect(array('action' => 'index'));
+		    //         }
 					$this->Session->setFlash(__('Cart successfully checked out. An email has been sent. Thank you.'),'flash_notification');
 					$this->redirect(array('action' => 'index'));
 				}

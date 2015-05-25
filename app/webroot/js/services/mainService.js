@@ -35,11 +35,14 @@ angular.module('mainService', [])
           }
           return str.join("&");
           },
-          data: {itemId:product.id, itemName:product.name, uom1:product.uom1, uom2:product.uom2 ,qty:1, price:product.price, total:product.price, session: product.session}
+          data: {itemId:product.id, itemName:product.name,uom:product.uom1, uom1:product.uom1, uom2:product.uom2 ,qty:1, price:product.price1, total:product.price1, session: product.session}
       });
     },
     getCarts : function() {
       return $http.get('/carts');
+    },
+    getUom : function(itemId,uom) {
+      return $http.get('/uom/view/'+itemId+'/'+uom);
     },
     getApplicant : function() {
       return $http.get('api/rapplicant');
@@ -95,6 +98,50 @@ angular.module('mainService', [])
        return str.join("&");
        },
        data: {qty:cart.qty, total:cart.qty*cart.price}
+      });
+    },
+    updateUom : function(cart) {
+      return $http({method:'PUT',url:'carts/' + cart.id,headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+       transformRequest: function(obj) {
+       var str = [];
+       for (var key in obj) {
+           if (obj[key] instanceof Array) {
+               for(var idx in obj[key]){
+                   var subObj = obj[key][idx];
+                   for(var subKey in subObj){
+                       str.push(encodeURIComponent(key) + "[" + idx + "][" + encodeURIComponent(subKey) + "]=" + encodeURIComponent(subObj[subKey]));
+                   }
+               }
+           }
+           else {
+               str.push(encodeURIComponent(key) + "=" + encodeURIComponent(obj[key]));
+           }
+       }
+       return str.join("&");
+       },
+       data: {uom:cart.uom}
+      });
+     },
+    updatePrice : function(id,newprice,qty) {
+      return $http({method:'PUT',url:'carts/'+id,headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+       transformRequest: function(obj) {
+       var str = [];
+       for (var key in obj) {
+           if (obj[key] instanceof Array) {
+               for(var idx in obj[key]){
+                   var subObj = obj[key][idx];
+                   for(var subKey in subObj){
+                       str.push(encodeURIComponent(key) + "[" + idx + "][" + encodeURIComponent(subKey) + "]=" + encodeURIComponent(subObj[subKey]));
+                   }
+               }
+           }
+           else {
+               str.push(encodeURIComponent(key) + "=" + encodeURIComponent(obj[key]));
+           }
+       }
+       return str.join("&");
+       },
+       data: {price: newprice,total: newprice*qty}
       });
     }
   }

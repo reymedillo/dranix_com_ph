@@ -14,7 +14,7 @@
       <div class="carousel-caption">
     <div class="col-md-12 carousel_header">
       <a href="/shop" style="text-decoration:none"><h1>FOR SALE LUMINARC PRODUCTS</h1></a>
-      <h3>FOR DRANIX EMPLOYEES ONLY!</h3>
+      <h3>FOR EMPLOYEES ONLY!</h3>
     </div>
       </div>
     </div>
